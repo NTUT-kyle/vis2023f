@@ -218,7 +218,11 @@
   <!-- ------------------------------------------------>
   <div class="row hw12">
     <div class="col-md-12 twenty">
-      心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。心得報告 100 字。
+      這次作業讓我了解到 D3 的基本操作，也讓我對 D3 有了初步的認識，雖然目前只嘗試過幾個呈現的方式，但在做 Strong 時也讓我認識更多的呈現作法，這對我之後的論文可能會有幫助，不過不知道為什麼助教要出 v3 以及 v7 的差別，是要讓我們知道版本差別函數會改變嗎？如果是的話那還真是謝了，因為我在這邊搞了兩個多小時...才解決的，看來我還很嫩呢。
+      <br>
+      在 D3 畫廊方面蠻多新奇的方式，但我想不到有哪些能夠套用到成績上，看來我的想像力還不夠豐富，所以我才以簡單的呈現方式來完成！
+      <br>
+      提醒助教：原本 strong baseline 把它 checked 後無法加分，這點基本上就是後面的程式碼忘了加而已，加了就 OK 了。
     </div>
   </div>
 
@@ -339,9 +343,6 @@
   d3.select("#myCheckbox2").on("change",update);
   d3.select("#myCheckbox3").on("change",update);
   d3.select("#myCheckbox4").on("change",update);
-  d3.select("#myCheckbox5").on("change",update);
-  d3.select("#myCheckbox6").on("change",update);
-  d3.select("#myCheckbox7").on("change",update);
 
   update();
   
@@ -359,6 +360,10 @@
 
     if (d3.select("#myCheckbox3").property("checked")){
       score += parseInt(d3.select('#m3').html());   
+    }
+
+    if (d3.select("#myCheckbox4").property("checked")){
+      score += parseInt(d3.select('#m4').html());   
     }
 
     d3.select("#myTotal").html(score);    
