@@ -49,20 +49,30 @@
       </div>
 
       <div id="info-container">
-        <p id="distance-info"></p>
-        <p id="time-info"></p>
-        <p id="calories-info"></p>
+        <div id="distance-info"></div>
+        <div id="time-info"></div>
+        <label>Speed: </label>
+        <input id="rangeBar" style="display:inline" type="range" min="100" max="2000" step="100" value="500" oninput="rangeInput()">
+        <label id="rangeBarValue">500</label>
+        <div id="calories-info"></div>
       </div>
       
       <script src="../js/path.js"></script>
       <script src="../js/script.js"></script>
       <script src="../js/calorie.js"></script>
       <script>
-        // 初始加載 icon 位置
-        loadjson();
-
-        // 每秒更新一次位置
-        setInterval(updatePage, 100);
+        window.onload = () => {
+            rangeInput();
+            // 初始加載 icon 位置
+            loadjson();
+            // 每秒更新一次位置
+            setTimeout(updatePage, 500);
+        }
+        
+        function rangeInput() {
+            let x = document.getElementById("rangeBar").value;
+            document.getElementById("rangeBarValue").innerHTML = x + " ms";
+        }
       </script>
 </body>
 </html>

@@ -17,11 +17,11 @@ function updatePage() {
     const point = calorieData[calorieIndex];
     updateIconPosition(point.X, point.Y);
     updateInfo(point.Time, point.Floor, point.Distance, point.Calorie);
-    console.log(point.Floor);
     calorieIndex++;
   } else {
     calorieIndex = 0;
   }
+  setTimeout(updatePage, document.getElementById('rangeBar').value);
 }
 
 // 新增一個函數用來更新資訊
