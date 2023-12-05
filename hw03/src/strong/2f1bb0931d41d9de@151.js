@@ -42,23 +42,6 @@ function _tw(d3){return(
 d3.json("https://cdn.jsdelivr.net/npm/taiwan-atlas/towns-10t.json")
 )}
 
-function _twCountyHandler(tw)
-{
-  tw.objects.counties.geometries.forEach((element) => {
-    if (element.properties.COUNTYNAME === "台東縣") {
-      element.properties.COUNTYNAME = "臺東縣";
-    } else if (element.properties.COUNTYNAME === "台中市") {
-      element.properties.COUNTYNAME = "臺中市";
-    } else if (element.properties.COUNTYNAME === "台北市") {
-      element.properties.COUNTYNAME = "臺北市";
-    } else if (element.properties.COUNTYNAME === "台南市") {
-      element.properties.COUNTYNAME = "臺南市";
-    }
-  });
-  return "處理台與臺的關係"
-}
-
-
 function _topojson(require){return(
 require("topojson-client@3")
 )}
@@ -80,6 +63,18 @@ Inputs.range([0, 1], {
 
 function _chart(d3,LivePlace_uniqueValues,topojson,tw,DOM,bgColor,strokeColor,strokeOpacity,scaleCount,returnCount)
 {
+  // 處理台與臺的關係
+  tw.objects.counties.geometries.forEach((element) => {
+    if (element.properties.COUNTYNAME === "台東縣") {
+      element.properties.COUNTYNAME = "臺東縣";
+    } else if (element.properties.COUNTYNAME === "台中市") {
+      element.properties.COUNTYNAME = "臺中市";
+    } else if (element.properties.COUNTYNAME === "台北市") {
+      element.properties.COUNTYNAME = "臺北市";
+    } else if (element.properties.COUNTYNAME === "台南市") {
+      element.properties.COUNTYNAME = "臺南市";
+    }
+  });
   const color = d3.scaleQuantize([0, LivePlace_uniqueValues.length + 10], d3.schemeBlues[9]);
   
   const width = 300;
@@ -141,7 +136,7 @@ export default function define(runtime, observer) {
   const main = runtime.module();
   function toString() { return this.url; }
   const fileAttachments = new Map([
-    ["UserData.json", {url: new URL("../json/userData.json", import.meta.url), mimeType: "application/json", toString}]
+    ["UserData.json", {url: new URL("../json/UserData.json", import.meta.url), mimeType: "application/json", toString}]
   ]);
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], _1);
@@ -152,7 +147,6 @@ export default function define(runtime, observer) {
   main.variable(observer("scaleCount")).define("scaleCount", ["LivePlace_uniqueValues","LivePlace_counts"], _scaleCount);
   main.variable(observer("returnCount")).define("returnCount", ["LivePlace_uniqueValues","LivePlace_counts"], _returnCount);
   main.variable(observer("tw")).define("tw", ["d3"], _tw);
-  main.variable(observer("twCountyHandler")).define("twCountyHandler", ["tw"], _twCountyHandler);
   main.variable(observer("topojson")).define("topojson", ["require"], _topojson);
   main.variable(observer("viewof bgColor")).define("viewof bgColor", ["Inputs"], _bgColor);
   main.variable(observer("bgColor")).define("bgColor", ["Generators", "viewof bgColor"], (G, _) => G.input(_));
