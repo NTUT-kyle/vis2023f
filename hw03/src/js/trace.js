@@ -65,6 +65,6 @@ function updatePage() {
     if (currentIndex >= userLocationData.length) {
       currentIndex = 0;
     }
-    setTimeout(updatePage, document.getElementById('rangeBar').value);
   }
+  setTimeout(updatePage, document.getElementById('rangeBar').value);
 }

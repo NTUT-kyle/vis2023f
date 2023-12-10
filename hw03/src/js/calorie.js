@@ -13,7 +13,7 @@ function loadjson() {
 }
 
 function updatePage() {
-  if (calorieIndex < calorieData.length) {
+  if (calorieData && calorieIndex < calorieData.length) {
     const point = calorieData[calorieIndex];
     updateIconPosition(point.X, point.Y);
     updateInfo(point.Time, point.Floor, point.Distance, point.Calorie);
